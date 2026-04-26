@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Warp II: Conquest — Explorer Analyzer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Share+Tech&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #000;
+  font-family: 'Bangers', 'Arial Black', Impact, sans-serif;
+  color: #fefefe;
+}
+#game { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+.slide {
+  display: none;
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  flex-direction: column;
+}
+.slide.active { display: flex; opacity: 1; }
+.slide-bg {
+  position: absolute; inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  z-index: 0;
+}
+.buttons {
+  position: absolute;
+  bottom: 4vh; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vh;
+  z-index: 5;
+  align-items: center;
+}
+.btn {
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border: 2px solid #c9a14a;
+  border-radius: 0;
+  padding: 1.5vh 4vw;
+  font-family: 'Bangers', 'Arial Black', sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  cursor: pointer;
+  letter-spacing: 2px;
+  min-width: 30vw;
+  text-align: center;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover {
+  background: #7a1f1f;
+  transform: scale(1.04);
+}
+.btn.primary {
+  background: #c9a14a;
+  color: #000;
+}
+.btn.primary:hover {
+  background: #fff;
+  color: #000;
+}
+#mute-btn, #fullscreen-btn {
+  position: fixed; top: 1vh;
+  z-index: 99;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 5px;
+  padding: 0.5vh 1vw;
+  font-family: 'Share Tech', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  opacity: 0.6;
+}
+#mute-btn { right: 1vw; }
+#fullscreen-btn { right: 7vw; }
+#mute-btn:hover, #fullscreen-btn:hover { opacity: 1; }
+#mr-roughton-credit {
+  position: fixed; bottom: 6px; right: 10px; z-index: 98;
+  font-family: 'Share Tech', Arial, sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.55);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  letter-spacing: 0.5px;
+}
+#mr-roughton-credit a { color: rgba(255,215,0,0.85); text-decoration: none; }
+</style>
+</head>
+<body>
+<div id="game"></div>
+
+<button id="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+<button id="mute-btn" onclick="toggleMute()">🔊 Mute</button>
+
+<div id="mr-roughton-credit">
+  Time Warp by Mr. Jorgensen — original concept
+  <a href="https://www.mrroughton.com" target="_blank" rel="noopener">mrroughton.com</a>
+</div>
+
+<audio id="hub-music" loop preload="auto">
+  <source src="audio/hub/main.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Each slide: bg = rendered PPTX page; buttons drive routing.
+// Result slides have a single TIME WARP button that navigates to the explorer's HTML.
+const SLIDES = [
+  // Q1 — motivation
+  { id: "slide_1", bg: "slides/analyzer/page_01.jpg", buttons: [
+    { text: "Riches and Fame", target: "slide_2" },
+    { text: "Adventure",       target: "slide_3" }
+  ]},
+  // Q2 — nation (Riches path)
+  { id: "slide_2", bg: "slides/analyzer/page_02.jpg", buttons: [
+    { text: "Spain",    target: "slide_14" },  // -> Narváez
+    { text: "Portugal", target: "slide_10" },  // -> Da Gama
+    { text: "England",  target: "slide_6"  }   // -> Raleigh
+  ]},
+  // Q2 — nation (Adventure path)
+  { id: "slide_3", bg: "slides/analyzer/page_03.jpg", buttons: [
+    { text: "Spain",    target: "slide_12" },  // -> Corte-Real Bros
+    { text: "Portugal", target: "slide_8"  },  // -> Magellan
+    { text: "England",  target: "slide_4"  }   // -> Drake
+  ]},
+  // Adventure + England -> Drake
+  { id: "slide_4", bg: "slides/analyzer/page_04.jpg", buttons: [
+    { text: "BEGIN PROGRAM", target: "slide_5", primary: true }
+  ]},
+  { id: "slide_5", bg: "slides/analyzer/page_05.jpg", buttons: [
+    { text: "TIME WARP — Sir Francis Drake", target: "drake.html", primary: true }
+  ]},
+  // Riches + England -> Raleigh
+  { id: "slide_6", bg: "slides/analyzer/page_06.jpg", buttons: [
+    { text: "BEGIN PROGRAM", target: "slide_7", primary: true }
+  ]},
+  { id: "slide_7", bg: "slides/analyzer/page_07.jpg", buttons: [
+    { text: "TIME WARP — Walter Raleigh", target: "raleigh.html", primary: true }
+  ]},
+  // Adventure + Portugal -> Magellan
+  { id: "slide_8", bg: "slides/analyzer/page_08.jpg", buttons: [
+    { text: "BEGIN PROGRAM", target: "slide_9", primary: true }
+  ]},
+  { id: "slide_9", bg: "slides/analyzer/page_09.jpg", buttons: [
+    { text: "TIME WARP — Ferdinand Magellan", target: "magellan.html", primary: true }
+  ]},
+  // Riches + Portugal -> Da Gama
+  { id: "slide_10", bg: "slides/analyzer/page_10.jpg", buttons: [
+    { text: "BEGIN PROGRAM", target: "slide_11", primary: true }
+  ]},
+  { id: "slide_11", bg: "slides/analyzer/page_11.jpg", buttons: [
+    { text: "TIME WARP — Vasco da Gama", target: "dagama.html", primary: true }
+  ]},
+  // Adventure + Spain -> Corte-Real Bros
+  { id: "slide_12", bg: "slides/analyzer/page_12.jpg", buttons: [
+    { text: "BEGIN PROGRAM", target: "slide_13", primary: true }
+  ]},
+  { id: "slide_13", bg: "slides/analyzer/page_13.jpg", buttons: [
+    { text: "TIME WARP — The Corte-Real Bros", target: "cortereal.html", primary: true }
+  ]},
+  // Riches + Spain -> Narváez
+  { id: "slide_14", bg: "slides/analyzer/page_14.jpg", buttons: [
+    { text: "BEGIN PROGRAM", target: "slide_15", primary: true }
+  ]},
+  { id: "slide_15", bg: "slides/analyzer/page_15.jpg", buttons: [
+    { text: "TIME WARP — Pánfilo de Narváez", target: "narvaez.html", primary: true }
+  ]}
+];
+
+function goToSlide(targetId) {
+  // External navigation
+  if (targetId.endsWith(".html")) {
+    window.location.href = targetId;
+    return;
+  }
+  // Internal slide
+  const slide = SLIDES.find(s => s.id === targetId);
+  if (!slide) return;
+
+  // Hide previous
+  document.querySelectorAll(".slide.active").forEach(el => {
+    el.classList.remove("active");
+    setTimeout(() => el.remove(), 500);
+  });
+
+  // Render new
+  const el = document.createElement("div");
+  el.className = "slide";
+  el.innerHTML =
+    '<div class="slide-bg" style="background-image:url(\'' + slide.bg + '\');"></div>' +
+    '<div class="buttons">' +
+      slide.buttons.map(b =>
+        '<button class="btn ' + (b.primary ? 'primary' : '') + '" onclick="goToSlide(\'' + b.target + '\')">' + b.text + '</button>'
+      ).join('') +
+    '</div>';
+  document.getElementById("game").appendChild(el);
+  setTimeout(() => el.classList.add("active"), 30);
+
+  // Try resume music
+  const m = document.getElementById("hub-music");
+  if (m && m.paused) {
+    m.volume = 0.45;
+    m.play().catch(function(){});
+  }
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen().catch(()=>{});
+}
+function toggleMute() {
+  var m = document.getElementById("hub-music");
+  if (!m) return;
+  m.muted = !m.muted;
+  document.getElementById("mute-btn").innerHTML = m.muted ? "🔇 Muted" : "🔊 Mute";
+}
+// Auto-start music on first user interaction (Chrome autoplay policy)
+document.addEventListener("click", function startMusic() {
+  var m = document.getElementById("hub-music");
+  if (m && m.paused) { m.volume = 0.45; m.play().catch(function(){}); }
+}, { once: true });
+window.addEventListener("load", function() {
+  var m = document.getElementById("hub-music");
+  if (m) { m.volume = 0.45; m.play().catch(function(){}); }
+  goToSlide("slide_1");
+});
+</script>
+</body>
+</html>
