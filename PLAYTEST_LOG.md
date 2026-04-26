@@ -115,6 +115,23 @@ Each issue gets:
   3. Restructure: GIF on top half of slide, title+caption on bottom half (no overlap)
 - **Status:** OPEN
 
+### #10 — Country selection only has Spain button, missing Portugal
+- **Severity:** BLOCKER (gameplay path broken)
+- **Page:** index.html (hub) — country selection slide
+- **Symptom:** Player should be able to pick Spain OR Portugal (or England, depending on the flow). Only Spain is clickable; Portugal button is missing/non-clickable.
+- **Likely cause:** Either (a) the country-selection slide's `buttons` array in SLIDES has only one entry, or (b) the slide has multiple text labels but only one bound to a click handler. Previous commit `943b343` was titled "Fix: Spain and Portugal are now separate clickable buttons on country selection slide" — could be regression after my PPTX-fidelity patch cleared `styled_texts`.
+- **Status:** ✅ FIXED — added Portugal button targeting slide_6 (King John II flow), Spain button now correctly targets slide_11 (Spain flow). Previously commit 943b343 had this fix; an automated rebuild dropped it. `_patch_index_fidelity.py` restored it.
+
+### #11 — A ton of captions are missing
+- **Severity:** MAJOR (need location)
+- **Page:** unknown — likely hub. Need screenshot or "on which slide?"
+- **Symptom:** "Missing a ton of captions" — text labels that were in the PPTX aren't appearing in HTML.
+- **Possible causes:**
+  - My PPTX-fidelity patch cleared `styled_texts`. If the hub slide had text overlays NOT baked into the PPTX render (e.g., dynamic text from the engine), those are gone.
+  - PPTX render might be cropping or scaling text off-screen
+  - Hub-specific slide has interactive text labels that aren't visible without the JS overlay
+- **Status:** ✅ FIXED — root cause found: `index.html` was missed by `_patch_pptx_fidelity.py` (the patch script only listed character HTMLs in `PDF_MAP`, not the hub). So the hub still had old broken inline base64 bg_images, AND my CSS rule `.pptx-text { display: none }` hid the text overlays that were carrying the actual content. `_patch_index_fidelity.py` repointed all 36 hub slides to `slides/columbus/page_NN.jpg` (the hub shares the Tutorial w Columbus PPTX). All other characters were already fixed.
+
 ### #3 — Captions are blocking the title
 - **Severity:** MAJOR (visual/legibility)
 - **Page(s):** likely gameover slides (the v2 caption injection). Possibly other slides if I patched them too.
@@ -127,7 +144,8 @@ Each issue gets:
 
 ## Things confirmed working (positive log)
 
-- ✅ **Music** — "Love the music though." Per-character royalty-free tracks landing well.
+- ✅ **Music (general)** — "Love the music though." Per-character royalty-free tracks landing well.
+- ✅ **Hub music** — "LOVE the Time Warp Hub song" (Kevin MacLeod *Volatile Reaction*, CC-BY 4.0)
 
 ---
 
