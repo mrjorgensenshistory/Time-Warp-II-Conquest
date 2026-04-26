@@ -1,0 +1,25 @@
+Track: Volatile Reaction
+File:  main.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html (search "Volatile Reaction")
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Volatile%20Reaction.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Required attribution string (paste into credits page):
+"Volatile Reaction" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+Why this track for the hub:
+Driving, dangerous-but-fun bed that says "you're about to make 7 bad
+decisions." Loops cleanly. Sits at moderate volume.
+
+ALT IF MISS - more shanty/storm vibe:
+- "Pippin the Hunchback" (Kevin MacLeod, CC-BY) - jaunty pirate-tavern feel
+- Pixabay "pirate ambient": https://pixabay.com/music/search/pirate/
+- Pixabay "tavern": https://pixabay.com/music/search/tavern/
+
+OPTIONAL LAYER SFX (CC0, freesound.org):
+- Ocean storm loop: https://freesound.org/search/?q=storm+ocean+loop&f=license:%22Creative+Commons+0%22
+- Creaking ship:   https://freesound.org/search/?q=creaking+ship&f=license:%22Creative+Commons+0%22

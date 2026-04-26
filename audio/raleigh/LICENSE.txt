@@ -1,0 +1,24 @@
+Track: Court and Page
+File:  main.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html (search "Court and Page")
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Court%20and%20Page.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Required attribution string (paste into credits page):
+"Court and Page" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+Why this track for Raleigh:
+Renaissance court instrumentation (lute / harpsichord-flavored ensemble) -
+exactly the Elizabethan court vibe called for. Doesn't have the executioner-
+drum heel turn baked in; layer that in the death-slide audio mix.
+
+LAYER SFX for Tower-of-London arc:
+- Slow drum/timpani: https://pixabay.com/sound-effects/search/timpani/
+- Executioner thunk: https://freesound.org/search/?q=axe+wood&f=license:%22Creative+Commons+0%22
+
+ALT IF MISS: "Pippin the Hunchback" or "Royal Banana" by Kevin MacLeod
+for similar Renaissance court flavor.

@@ -1,0 +1,45 @@
+================================================================
+STINGS BUNDLE - 3 short cues
+================================================================
+
+----------------------------------------------------------------
+Track: Sad Trombone
+File:  gameover.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Sad%20Trombone.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Why: Classic 3-sec brassy fail sting. Plays when game-over slide enters,
+ducks under the Rickroll-shanty cherry on top.
+
+----------------------------------------------------------------
+Track: Failing Defense
+File:  fail.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Failing%20Defense.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Why: Cinematic fail sting (longer than gameover.mp3) - use for boss-tier
+mid-voyage fails (mutiny, getting boarded) where the trombone gag is too
+small.
+
+----------------------------------------------------------------
+SFX: cannon.mp3 (NOT YET DOWNLOADED)
+Recommended source: Freesound.org CC0 cannon samples
+Search: https://freesound.org/search/?q=cannon&f=license:%22Creative+Commons+0%22
+Specific candidates (verify license at click-through):
+  - "Cannon Fire" by Channel-X (CC0)
+  - "Cannon" by qubodup (CC0)
+Save as: F:\Michael's\ACE\US History\Time-Warp-II-Conquest\audio\stings\cannon.mp3
+
+Pixabay alt: https://pixabay.com/sound-effects/search/cannon/
+(Pixabay Content License - free, no attribution required)
+
+----------------------------------------------------------------
+Required attribution string for the two Kevin MacLeod stings:
+"Sad Trombone" Kevin MacLeod (incompetech.com)
+"Failing Defense" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/

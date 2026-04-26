@@ -1,0 +1,26 @@
+Track: Spanish Jam
+File:  main.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html (search "Spanish Jam")
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Spanish%20Jam.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Required attribution string (paste into credits page):
+"Spanish Jam" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+Why this track for Narvaez:
+Spanish-flavored guitar - matches the flamenco-into-despair arc described
+in the brief. (Note: brief calls for the track to "rot into hurricane wind."
+That layering happens in the slide audio mix - bring in a wind/swamp SFX
+loop on top via a second <audio> tag during the death-march slides.)
+
+LAYER SFX (free / CC0):
+- Hurricane wind: https://pixabay.com/sound-effects/search/hurricane/
+- Swamp insects:  https://pixabay.com/sound-effects/search/swamp/
+- Bayou night:    https://freesound.org/search/?q=bayou&f=license:%22Creative+Commons+0%22
+
+ALT IF MISS: "Tafi Maradi" or "Crusade - Heavy Industry" by Kevin MacLeod for
+darker Spanish-tinged options.

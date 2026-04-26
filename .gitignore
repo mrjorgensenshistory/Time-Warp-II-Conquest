@@ -1,0 +1,22 @@
+# Drake classroom-only variant — uses copyrighted Drake track under §110(1)
+# face-to-face teaching exception. NEVER push to public GitHub Pages.
+drake_classroom.html
+audio/drake_classroom/
+audio/drake_classroom/*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Build / temp
+*.log
+*.tmp
+__pycache__/
+.pytest_cache/
+
+# Local QC working files
+qc_screenshots/
+*_local.html

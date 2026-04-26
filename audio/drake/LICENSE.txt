@@ -1,0 +1,53 @@
+SLOT: Drake (PUBLIC version - drake.html, deployed to GitHub Pages)
+
+STATUS: NOT YET DOWNLOADED. Pixabay does not expose stable hot-link URLs
+for individual tracks; you must download manually via the Pixabay UI.
+
+================================================================
+HARD CONSTRAINT: NO Drake (the rapper) recordings, samples, or
+direct interpolations. This file is for a TRAP/LO-FI INSTRUMENTAL
+that EVOKES the OVO/Toronto sound without using Drake's music.
+================================================================
+
+RECOMMENDED CANDIDATES (auditioned by description; pick whichever fits best):
+
+1. Pixabay search: "dark trap"
+   https://pixabay.com/music/search/dark%20trap/
+   Look for: 808-heavy, minor-key piano, ~70-90 BPM, instrumental,
+   2-4 min, loopable. Avoid anything with vocal hooks.
+
+2. Pixabay search: "lo-fi hip hop"
+   https://pixabay.com/music/search/lo-fi%20hip%20hop/
+   Good fallback - chill chord stabs + boom-bap drums.
+
+3. Pixabay search: "drill instrumental"
+   https://pixabay.com/music/search/drill/
+   Sliding 808s, hi-hat rolls. Closest to current rap sound.
+
+4. Pixabay search: "trap beat ocean"
+   https://pixabay.com/music/search/trap%20ocean/
+   Rare crossover - if this returns hits it's the dream slot.
+
+5. Free Music Archive: https://freemusicarchive.org/genre/Hip-Hop/
+   Filter by CC0 / CC-BY only. Legal-bulletproof source.
+
+DOWNLOAD STEPS (Pixabay):
+1. Click track title -> "Free Download" -> sign in (free account).
+2. Save as: F:\Michael's\ACE\US History\Time-Warp-II-Conquest\audio\drake\main.mp3
+3. Replace this file's "ATTRIBUTION" block below with the actual
+   track title + uploader name copied from Pixabay's page.
+
+License: Pixabay Content License
+License URL: https://pixabay.com/service/license-summary/
+- Free for commercial and non-commercial use
+- No attribution required (encouraged but optional)
+- Cannot resell as-is on stock sites
+
+ATTRIBUTION (fill in after download):
+Track: __________________________________________
+Uploader: _______________________________________
+Pixabay URL: ____________________________________
+Downloaded: _____________________________________
+
+OPTIONAL CREDIT LINE:
+Music by [Uploader] from Pixabay (pixabay.com)

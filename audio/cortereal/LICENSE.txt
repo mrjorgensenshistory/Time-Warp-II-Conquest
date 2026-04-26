@@ -1,0 +1,21 @@
+Track: Anamalie
+File:  main.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html (search "Anamalie")
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Anamalie.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Required attribution string (paste into credits page):
+"Anamalie" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+Why this track for Corte-Real:
+Mysterious, drifting acoustic-guitar texture that reads as North-Atlantic-fog
+melancholy. Closest CC-BY substitute for Portuguese fado without resorting to
+unverified Pixabay user uploads.
+
+ALT IF MISS: Try "Beauty Flow" or "Andreas Theme" by Kevin MacLeod.
+For more authentic fado, try Pixabay search:
+https://pixabay.com/music/search/fado/  (Pixabay Content License - free)

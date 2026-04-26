@@ -1,0 +1,20 @@
+Track: Long Note Three
+File:  main.mp3
+Source URL: https://incompetech.com/music/royalty-free/music.html (search "Long Note Three")
+Direct MP3: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Long%20Note%20Three.mp3
+Composer: Kevin MacLeod
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Required attribution string (paste into credits page):
+"Long Note Three" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+Why this track for Magellan:
+Sustained tension that builds without fully resolving - perfect for the
+"epic ocean dread that ends in violent cutoff at Mactan" arc. The Master &
+Commander cousin called for in the brief.
+
+ALT IF MISS: "Hitman" or "Impact Andante" by Kevin MacLeod (both listed in
+the spec as fallbacks).
