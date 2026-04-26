@@ -291,6 +291,8 @@ function playGameOverBuzz() {
 }
 
 function goToSlide(id) {
+    /* TW2-EXT-HTML-TARGET */
+    if (typeof id === 'string' && id.endsWith('.html')) { window.location.href = id; return; }
     if (!id) return;
     if (id === 'HOME') {
         window.location.href = 'analyzer.html';
@@ -514,10 +516,22 @@ document.addEventListener('click', function startMusic() {
 
 /* Push fullscreen-gif lower so caption stays visible above */
 .gameover-slide .fullscreen-gif {
-  top: 60% !important;
-  max-height: 50vh !important;
-  max-width: 60vw !important;
+  top: auto !important;
+  left: auto !important;
+  right: 2vw !important;
+  bottom: 12vh !important;
+  transform: none !important;
+  max-width: 26vw !important;
+  max-height: 30vh !important;
   z-index: 5 !important;
+  border: 2px solid rgba(201,161,74,0.6);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.7);
+  border-radius: 6px;
+}
+.gameover-slide .buttons {
+  z-index: 30 !important;
+  bottom: 3vh !important;
+  position: absolute !important;
 }
 
 /* Bring buttons above GIF */
@@ -565,29 +579,50 @@ document.addEventListener('click', function startMusic() {
 <!-- TW2-YT-ENGINE-V1 -->
 <style>
 .yt-overlay {
-  position: absolute;
-  top: 8vh; left: 50%;
-  transform: translateX(-50%);
-  width: 70vw;
-  max-width: 900px;
-  aspect-ratio: 16/9;
-  z-index: 20;
-  background: #000;
-  border: 3px solid #c9a14a;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-}
-.yt-overlay iframe {
-  width: 100%; height: 100%; border: 0;
-}
-.yt-overlay .yt-label {
-  position: absolute;
-  top: -3vh; left: 0;
-  font-family: 'Bangers', Arial, sans-serif;
-  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+  position: fixed;
+  bottom: 7vh; right: 1.5vw;
+  z-index: 50;
+  display: flex; align-items: center; gap: 0.6vw;
+  background: rgba(0,0,0,0.75);
+  border: 2px solid #c9a14a;
+  padding: 0.6vh 1vw 0.6vh 0.8vw;
+  font-family: 'Share Tech', Arial, sans-serif;
+  font-size: clamp(0.7rem, 1vw, 0.9rem);
   color: #c9a14a;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  max-width: 280px;
 }
+.yt-overlay iframe {
+  position: absolute !important;
+  left: -10000px !important;
+  top: 0 !important;
+  width: 320px !important; height: 240px !important;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.yt-overlay .yt-label {
+  font-family: 'Bangers', Arial, sans-serif;
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
+  color: #c9a14a;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  position: static;
+}
+.yt-overlay .yt-close {
+  background: rgba(122,31,31,0.9);
+  color: #fff;
+  border: 1px solid #c9a14a;
+  font-family: 'Share Tech', sans-serif;
+  font-size: 0.7rem;
+  padding: 0.2vh 0.6vw;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+}
+.yt-overlay .yt-close:hover { background: #c9a14a; color: #000; }
 </style>
 <script>
 (function() {
@@ -623,5 +658,29 @@ document.addEventListener('click', function startMusic() {
 })();
 </script>
 
+
+<!-- TW2-GAMEOVER-AUDIO-STOP-V2 -->
+<script>
+(function() {
+  if (typeof window.goToSlide !== 'function') return;
+  var prev = window.goToSlide;
+  window.goToSlide = function(id) {
+    var active = document.querySelector('.slide.active');
+    if (active && active.classList.contains('gameover-slide')) {
+      var go = document.getElementById('gameover-sound');
+      if (go) { try { go.pause(); go.currentTime = 0; } catch(e) {} }
+    }
+    // Also kill any active YT iframe audio
+    document.querySelectorAll('.yt-overlay').forEach(function(el){
+      var f = el.querySelector('iframe');
+      if (f) { try { f.src = 'about:blank'; } catch(e){} }
+      el.remove();
+    });
+    var bg = document.getElementById('bg-music');
+    if (bg) bg.muted = false;
+    prev(id);
+  };
+})();
+</script>
 </body>
 </html>

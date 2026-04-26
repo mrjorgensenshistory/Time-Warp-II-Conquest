@@ -132,6 +132,19 @@ Each issue gets:
   - Hub-specific slide has interactive text labels that aren't visible without the JS overlay
 - **Status:** ✅ FIXED — root cause found: `index.html` was missed by `_patch_pptx_fidelity.py` (the patch script only listed character HTMLs in `PDF_MAP`, not the hub). So the hub still had old broken inline base64 bg_images, AND my CSS rule `.pptx-text { display: none }` hid the text overlays that were carrying the actual content. `_patch_index_fidelity.py` repointed all 36 hub slides to `slides/columbus/page_NN.jpg` (the hub shares the Tutorial w Columbus PPTX). All other characters were already fixed.
 
+### #12 — Button redundancy: PPTX-baked buttons + engine bottom buttons both visible
+- **Severity:** MAJOR (UX clutter)
+- **Pages:** Analyzer (most visible — quiz buttons appear in slide AND at bottom). Same pattern likely affects character HTMLs.
+- **Symptom:** PPTX render shows the buttons baked into the slide image. Engine adds bottom buttons that work but are redundant.
+- **Fix in progress:** extract exact button positions from PPTX via python-pptx, overlay invisible click hotspots at those positions, hide engine bottom buttons. Done for analyzer.html. Character HTMLs deferred.
+- **Status:** ✅ FIXED for analyzer.html. Extracted exact button positions from PPTX via python-pptx, overlaid invisible click hotspots at those positions (subtle gold border on hover for discoverability), removed engine bottom buttons. Character HTMLs deferred — same approach can be applied if needed.
+
+### #13 — No way to lose (or gameovers not being hit)
+- **Severity:** BLOCKER if reproducible
+- **Page:** index.html (Columbus tutorial), Spain path
+- **Symptom:** Michael guessing without reading, hasn't lost yet. Tutorial has 8 gameover slides (10, 14, 16, 23, 24, 27, 30, 33). Either (a) he's making right choices by luck, OR (b) `_patch_info_advance.py` mis-converted a gameover-meant slide into an info slide with "Continue" button, skipping failures.
+- **Status:** ✅ RESOLVED — false alarm. Michael confirmed: "Nevermind, you can lose…I was just lucky before." Gameovers reachable as intended.
+
 ### #3 — Captions are blocking the title
 - **Severity:** MAJOR (visual/legibility)
 - **Page(s):** likely gameover slides (the v2 caption injection). Possibly other slides if I patched them too.
