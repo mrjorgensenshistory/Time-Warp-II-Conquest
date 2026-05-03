@@ -880,5 +880,39 @@ document.addEventListener('click', function startMusic() {
      style="color:rgba(201,161,74,0.75);text-decoration:none;">CC BY 4.0</a>.
   Cannon SFX: SoundBible.
 </div>
+
+<!-- TW2-FULLSCREEN-PERSIST-V1 -->
+<script>
+(function() {
+  // Override toggleFullscreen to persist preference across page loads
+  var _origToggle = window.toggleFullscreen;
+  window.toggleFullscreen = function() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(function() {
+        try { localStorage.setItem('tw2_fullscreen', '1'); } catch(e) {}
+      }).catch(function(){});
+    } else {
+      document.exitFullscreen().then(function() {
+        try { localStorage.setItem('tw2_fullscreen', '0'); } catch(e) {}
+      }).catch(function(){});
+    }
+  };
+
+  // On page load: if pref was set, restore fullscreen on FIRST user interaction
+  // (browsers require user gesture for requestFullscreen)
+  try {
+    if (localStorage.getItem('tw2_fullscreen') === '1' && !document.fullscreenElement) {
+      var restore = function() {
+        if (document.fullscreenElement) return;
+        document.documentElement.requestFullscreen().catch(function(){});
+        document.removeEventListener('click', restore, true);
+        document.removeEventListener('keydown', restore, true);
+      };
+      document.addEventListener('click', restore, true);
+      document.addEventListener('keydown', restore, true);
+    }
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
