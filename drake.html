@@ -784,23 +784,20 @@ document.addEventListener('click', function startMusic() {
 })();
 </script>
 
-<!-- TW2-YT-END-RESTORE-V1 -->
+<!-- TW2-YT-END-RESTORE-V2 -->
 <script>
 (function() {
-  // Load YouTube IFrame Player API once
   if (!document.getElementById('yt-iframe-api-script')) {
     var tag = document.createElement('script');
     tag.id = 'yt-iframe-api-script';
     tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
   }
-  // Track active player so we can listen for end-of-song
   window._tw2_yt_player = null;
 
   function bindEndListener() {
     var iframes = document.querySelectorAll('.yt-overlay iframe');
     iframes.forEach(function(iframe) {
-      // Ensure enablejsapi=1 so the API can attach
       try {
         var src = iframe.src || '';
         if (src && src.indexOf('enablejsapi=1') === -1 && src.indexOf('about:blank') === -1) {
@@ -813,14 +810,26 @@ document.addEventListener('click', function startMusic() {
       try {
         window._tw2_yt_player = new window.YT.Player(iframe, {
           events: {
+            'onReady': function(event) {
+              try { event.target.setVolume(100); } catch(e) {}
+              try { event.target.unMute(); } catch(e) {}
+              // Hard-mute bg-music while song plays
+              var bg = document.getElementById('bg-music');
+              if (bg) { bg.muted = true; bg.volume = 0; }
+            },
             'onStateChange': function(event) {
-              // YT.PlayerState.ENDED === 0
-              if (event.data === 0) {
+              if (event.data === 1) {  // PLAYING
+                try { event.target.setVolume(100); } catch(e) {}
+                var bg = document.getElementById('bg-music');
+                if (bg) { bg.muted = true; bg.volume = 0; }
+              }
+              if (event.data === 0) {  // ENDED
                 var bg = document.getElementById('bg-music');
                 if (bg) {
                   bg.muted = false;
+                  bg.volume = 0.45;
                   if (bg.paused) {
-                    try { bg.volume = 0.45; bg.play().catch(function(){}); } catch(e){}
+                    try { bg.play().catch(function(){}); } catch(e){}
                   }
                 }
               }
@@ -831,7 +840,16 @@ document.addEventListener('click', function startMusic() {
     });
   }
 
-  // Watch the game div for new yt-overlay nodes (engine creates them async)
+  // Force-mute bg-music while YT iframe is present (defensive belt-and-suspenders)
+  setInterval(function() {
+    var hasYt = document.querySelector('.yt-overlay iframe');
+    var bg = document.getElementById('bg-music');
+    if (hasYt && bg && (!bg.muted || bg.volume > 0)) {
+      bg.muted = true;
+      bg.volume = 0;
+    }
+  }, 500);
+
   var observer = new MutationObserver(function(muts) {
     var hasYt = false;
     muts.forEach(function(m) {
@@ -842,15 +860,11 @@ document.addEventListener('click', function startMusic() {
         }
       });
     });
-    if (hasYt) {
-      // Slight delay so iframe src is set first by the existing engine
-      setTimeout(bindEndListener, 400);
-    }
+    if (hasYt) setTimeout(bindEndListener, 400);
   });
   document.addEventListener('DOMContentLoaded', function() {
     var game = document.getElementById('game');
     if (game) observer.observe(game, { childList: true, subtree: true });
-    // Also handle YouTube API readiness — bind any iframes already present
     window.onYouTubeIframeAPIReady = function() { bindEndListener(); };
   });
 })();
